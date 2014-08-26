@@ -1,0 +1,19 @@
+requires = [
+  'ui.router'
+]
+@App = angular.module 'App', requires
+
+App.config ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider, $provide) -> 
+  $locationProvider.html5Mode true
+  $httpProvider.defaults.headers.common["X-CSRF-TOKEN"] = $("meta[name=\"csrf-token\"]").attr("content")
+
+  $urlRouterProvider.when '', '/'  
+
+  $urlRouterProvider.otherwise ($injector, $location)->   
+    $state.go "root"
+
+  $stateProvider
+    .state 'root', {
+      url: '/'
+      templateUrl: "<%= asset_path('main.html') %>"
+      }  
