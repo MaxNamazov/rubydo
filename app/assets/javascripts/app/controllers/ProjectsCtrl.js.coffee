@@ -1,5 +1,8 @@
-App.controller 'ProjectsCtrl', ['$scope', 'Projects', 'Tasks', ($scope, Projects, Tasks)->
-  $scope.test = 'test'
+App.controller 'ProjectsCtrl', ['$scope', 'Projects', 'Tasks', 'Auth', ($scope, Projects, Tasks, Auth)->
+  
+  Auth.currentUser().then (user)->
+    console.log user
+  
   $scope.projects = []
   $scope.find = ->   
     Projects.query (projects)->
