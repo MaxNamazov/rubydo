@@ -6,6 +6,9 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+
+
+
 module Rubydo
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
@@ -19,6 +22,9 @@ module Rubydo
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
+    config.to_prepare do
+       DeviseController.respond_to :html, :json
+    end
     
   end
 end

@@ -1,5 +1,6 @@
 requires = [
   'ui.router'
+  'ngResource'
 ]
 @App = angular.module 'App', requires
 
@@ -13,7 +14,8 @@ App.config ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider
     $state.go "root"
 
   $stateProvider
-    .state 'root', {
+    .state 'root', 
       url: '/'
       templateUrl: "<%= asset_path('main.html') %>"
-      }  
+      controller: 'ProjectsCtrl'
+     

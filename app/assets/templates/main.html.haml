@@ -1,1 +1,18 @@
-test
+%div{'ng-init' => 'find()'} 
+  %ul
+    %li{'ng-repeat' => 'project in projects'}
+      %span {{project.name}}
+      %button{'ng-click' =>'deleteProject($index)'} x
+      %div
+        %input{:type => "text", 'ng-model' => 'newTitle'}/
+        %button{'ng-click' => 'addTask(newTitle)'} add
+      %ul.is-sortable
+        %li.task-item{'ng-repeat' => 'task in project.tasks'}
+          %input{:type => "checkbox", 'ng-model' => 'task.completed', 'ng-change' =>'updateTask()'}/
+          %span {{task.name}}
+          %button{'ng-click' =>'deleteTask($index)'} x
+
+  %hr/
+
+  %input{:type => "text", 'ng-model' => 'newProjectName'}/
+  %button{'ng-click' => 'addProject(newProjectName)'} add

@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
+  respond_to :json 
 
   # GET /tasks
   # GET /tasks.json
@@ -24,31 +25,25 @@ class TasksController < ApplicationController
   # POST /tasks
   # POST /tasks.json
   def create
-    @task = Task.new(task_params)
-
-    respond_to do |format|
-      if @task.save
-        format.html { redirect_to @task, notice: 'Task was successfully created.' }
-        format.json { render :show, status: :created, location: @task }
-      else
-        format.html { render :new }
-        format.json { render json: @task.errors, status: :unprocessable_entity }
-      end
-    end
+    @task = Task.new(task_params)    
+    if @task.save      
+      render json: { status: :created, task: @task }
+    else      
+      render json: @task.errors, status: :unprocessable_entity
+    end   
   end
 
   # PATCH/PUT /tasks/1
   # PATCH/PUT /tasks/1.json
-  def update
-    respond_to do |format|
-      if @task.update(task_params)
-        format.html { redirect_to @task, notice: 'Task was successfully updated.' }
-        format.json { render :show, status: :ok, location: @task }
-      else
-        format.html { render :edit }
-        format.json { render json: @task.errors, status: :unprocessable_entity }
-      end
-    end
+  def update   
+    if params.has_key?(:new_position)
+      @task.insert_at(params[:new_position])
+    end 
+    if @task.update(task_params)
+      render json: { status: :ok, task: @task }
+    else      
+      render json: @task.errors, status: :unprocessable_entity
+    end    
   end
 
   # DELETE /tasks/1

@@ -28,6 +28,8 @@ gem 'spring',        group: :development
 
 gem 'bower-rails'
 gem "haml"
+gem 'devise'
+gem 'acts_as_list'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

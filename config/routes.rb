@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
-  get 'main/index'
+  devise_for :users
+  get 'main/index'  
 
-  resources :tasks
-
-  resources :projects
+  resources :projects, defaults: {format: :json} do 
+    resources :tasks, :defaults => {format: :json}
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
