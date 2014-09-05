@@ -1,0 +1,27 @@
+App.controller 'BaseCtrl', ['$scope', '$rootScope', 'Auth', '$modal', '$http', ($scope, $rootScope, Auth, $modal, $http)->
+  $scope.$on "devise:unauthorized", (event, xhr, deferred) ->    
+    modalInstance = $modal.open(
+      templateUrl: "<%= asset_path('form.html') %>"
+      controller: 'LoginCtrl'
+      backdrop: 'static'      
+    )
+    modalInstance.result.then(
+      #user hit OK
+      (creds)->
+        Auth.login(creds).then(
+          (response) -> 
+            deferred.resolve response          
+          , 
+          (error) ->           
+            deferred.reject error
+        )
+      ,
+      #user hit cancel
+      ()->
+        deferred.reject 'User doesn\'t want to login...'
+    )
+    
+
+    return
+
+]

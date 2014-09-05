@@ -5,7 +5,7 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    @projects = current_user.projects.includes(:tasks)    
+    @projects = current_user.projects.includes(:tasks) if current_user
   end
 
   # GET /projects/1

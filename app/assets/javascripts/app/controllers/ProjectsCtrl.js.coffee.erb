@@ -1,23 +1,28 @@
-App.controller 'ProjectsCtrl', ['$scope', 'Projects', 'Tasks', 'Auth', ($scope, Projects, Tasks, Auth)->
-  
-  Auth.currentUser().then (user)->
-    console.log user
-  
+App.controller 'ProjectsCtrl', ['$scope', 'Projects', 'Tasks', 'Auth', '$modal', ($scope, Projects, Tasks, Auth, $modal)->
   $scope.projects = []
+  $scope.user = null
+  
+  $scope.init = ->    
+    Auth.currentUser().then(
+      (user)->
+        $scope.user = user        
+        $scope.find()
+      ,
+      (error)->
+        console.info error
+    )
+  
   $scope.find = ->   
     Projects.query (projects)->
       $scope.projects = projects    
 
-  $scope.changePosition = (id, position)->
-    console.log id, position
-    console.log this
+  $scope.changePosition = (id, position)->    
     Tasks.changePosition
       project_id: this.project.id
       task_id: id
       new_position: position
 
-  $scope.updateTask = ->
-    console.log this
+  $scope.updateTask = ->    
     Tasks.update
       project_id: this.$parent.project.id
       task_id: this.task.id
@@ -45,8 +50,6 @@ App.controller 'ProjectsCtrl', ['$scope', 'Projects', 'Tasks', 'Auth', ($scope, 
 
   $scope.deleteTask = (idx)->    
     Tasks.delete {project_id: this.$parent.project.id, task_id: this.task.id}, (res)->
-      $scope.find() if res.$resolved 
-      
-       
+      $scope.find() if res.$resolved       
 
 ]

@@ -1,0 +1,16 @@
+.modal-header
+  %h3.modal-title Login to RubyDo
+.modal-body
+  .container
+    %row
+      .col-md-3
+        %form{'name'=>'userForm', 'novalidate'=>'true', 'ng-submit'=>'userForm.$valid && ok()'}
+          .form-group{'ng-class'=> "{ 'has-error' : userForm.email.$invalid && !userForm.email.$pristine }"}
+            %input.form-control{'name' => 'email', :placeholder => "Email", :type => "email", 'autofocus'=>'true', 'required'=>true, 'ng-model'=>'creds.email'}/          
+          .form-group{'ng-class'=> "{ 'has-error' : userForm.password.$invalid && !userForm.password.$pristine }"}
+            %input.form-control{'name'=>'password',:type => "password", 'placeholder'=> 'Password', 'ng-model'=>'creds.password', 'required'=>'true', 'ng-minlength'=>'8' }/
+          %button.hide{type: 'submit'}
+.modal-footer
+  %button.btn.btn-primary{"ng-click" => "ok()", 'ng-disabled' => '!userForm.$valid'} OK
+  %button.btn.btn-warning{"ng-click" => "cancel()"} Cancel
+

@@ -1,8 +1,36 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-.task-item {
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  background-image: url(asset-path('bg.jpg'));
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.add-task-row{  
   background-color: #ccc;
-  display: block;
-  margin-bottom: 3px;
+  padding: 10px 40px;
+  margin-top: -15px;
+}
+.task-table {  
+  .task-status {
+    width: 5%;
+    text-align: center;
+  }
+  .task-controls .btn-group{
+    display: none;
+    width: 10%;
+    text-align: center;
+  }
+  tr:hover {
+    .task-controls .btn-group {
+      display: block;
+    }
+  }
 }
