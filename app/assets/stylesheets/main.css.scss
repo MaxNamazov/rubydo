@@ -18,19 +18,26 @@ body {
   padding: 10px 40px;
   margin-top: -15px;
 }
-.task-table {  
+.task-table {    
+  td {
+    vertical-align: middle !important;
+  }
   .task-status {
     width: 5%;
     text-align: center;
   }
-  .task-controls .btn-group{
-    display: none;
+  .task-controls {
     width: 10%;
     text-align: center;
+    .btn-group {
+      display: none;
+    }
+    
+    
   }
   tr:hover {
     .task-controls .btn-group {
-      display: block;
+      display: inline-block;
     }
   }
 }

@@ -11,7 +11,12 @@ App.controller 'ProjectsCtrl', ['$scope', 'Projects', 'Tasks', 'Auth', '$modal',
       (error)->
         console.info error
     )
-  
+  $scope.completedTasks = ->
+    completed = 0
+    completed+=1 for task in this.project.tasks when task.completed
+    return completed
+          
+
   $scope.find = ->   
     Projects.query (projects)->
       $scope.projects = projects    

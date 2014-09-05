@@ -2,7 +2,8 @@
 .row{'ng-init' => 'init()'}   
   .panel.panel-default.project-panel{'ng-repeat' => 'project in projects'}
     .panel-heading 
-      {{project.name}}
+      {{project.name}} |
+      %span.text-muted{'ng-show' => 'project.tasks.length'}  {{completedTasks()}}/{{project.tasks.length}} tasks completed
       %button{'ng-click' =>'deleteProject($index)'} x
     .panel-body
       .row.add-task-row
@@ -25,13 +26,14 @@
               .btn.btn-default
                 %span.glyphicon.glyphicon-trash{'ng-click' =>'deleteTask($index)'}
   %h2.text-center{'ng-show'=>'user && !projects.length'} No projects yet. Why don't you create one?
-  %hr/
-  .row.add-project-row
-    .col-lg-12
-      %form{'ng-submit' =>'addProject(newProjectName)'}
-        .input-group
-          %input.form-control{:type => "text", 'placeholder' =>'Start typing here to create a project...', 'ng-model' => 'newProjectName'}/
-          %span.input-group-btn
-            %submit.btn.btn-primary{'ng-click' => 'addProject(newProjectName)'} Add Project
+  %div.bottom-block{'ng-show'=>'user'}
+    %hr/
+    .row.add-project-row
+      .col-lg-12
+        %form{'ng-submit' =>'addProject(newProjectName)'}
+          .input-group
+            %input.form-control{:type => "text", 'placeholder' =>'Start typing here to create a project...', 'ng-model' => 'newProjectName'}/
+            %span.input-group-btn
+              %submit.btn.btn-primary{'ng-click' => 'addProject(newProjectName)'} Add Project
   -# %input{:type => "text", 'ng-model' => 'newProjectName'}/
   -# %button{'ng-click' => 'addProject(newProjectName)'} add
