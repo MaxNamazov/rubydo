@@ -4,7 +4,7 @@
   .container
     %row
       .col-md-3
-        %form{'name'=>'userForm', 'novalidate'=>'true', 'ng-submit'=>'userForm.$valid && ok()'}
+        %form{'name'=>'userForm', 'novalidate'=>'true', 'ng-submit'=>'userForm.$valid && login()'}
           .form-group{'ng-class'=> "{ 'has-error' : userForm.email.$invalid && !userForm.email.$pristine }"}
             %input.form-control{'name' => 'email', :placeholder => "Email", :type => "email", 'autofocus'=>'true', 'required'=>true, 'ng-model'=>'creds.email'}/          
           .form-group{'ng-class'=> "{ 'has-error' : userForm.password.$invalid && !userForm.password.$pristine }"}
