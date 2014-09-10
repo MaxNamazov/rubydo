@@ -1,0 +1,11 @@
+{
+  "name": "rubydo",
+  "dependencies": {
+    "angular": "latest",
+    "angular-ui-router": "latest",
+    "angular-resource": "latest",
+    "angular-devise": "latest",
+    "jquery-ui": "latest",
+    "angular-ui-bootstrap": "latest"    
+  }
+}

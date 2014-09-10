@@ -25,6 +25,16 @@ module Rubydo
     config.to_prepare do
        DeviseController.respond_to :html, :json
     end
+    config.assets.paths << Rails.root.join('vendor', 'assets', 'bower_components')
+    config.assets.precompile.shift
+
+    config.assets.precompile.push(Proc.new do |path|
+      File.extname(path).in? [
+        '.html', '.erb', '.haml',                 # Templates
+        '.png',  '.gif', '.jpg', '.jpeg', '.svg', # Images
+        '.eot',  '.otf', '.svc', '.woff', '.ttf', # Fonts
+      ]
+    end)
     
   end
 end
