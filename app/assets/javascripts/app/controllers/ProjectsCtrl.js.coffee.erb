@@ -32,6 +32,7 @@ App.controller 'ProjectsCtrl', ['$scope', 'Projects', 'Tasks', 'Auth', '$modal',
       project_id: this.$parent.project.id
       task_id: this.task.id
       task: this.task
+    this.editMode = false
 
   $scope.addTask = (title)->  
     self = this    

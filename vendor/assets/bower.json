@@ -6,6 +6,7 @@
     "angular-resource": "latest",
     "angular-devise": "latest",
     "jquery-ui": "latest",
-    "angular-ui-bootstrap": "latest"
+    "angular-ui-bootstrap": "latest",
+    "angular-contenteditable": "latest"
   }
 }

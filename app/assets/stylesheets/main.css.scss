@@ -12,13 +12,44 @@ body {
   background-size: cover;
   background-attachment: fixed;
 }
+.is-clickable {
+  cursor: pointer
+}
+.shadowed {
+  -webkit-box-shadow: 0px 1px 14px 0px rgba(0, 0, 0, 1);
+  -moz-box-shadow:    0px 1px 14px 0px rgba(0, 0, 0, 1);
+  box-shadow:         0px 1px 14px 0px rgba(0, 0, 0, 1);
+}
+.project-panel {
+  @extend .shadowed;
+  .panel-heading {
+    background-color: #216FB8;
+    text-shadow: 0px 1px 2px #000;
+  }
+  .panel-title {
+    display: inline-block;
+    text-transform: uppercase;
+  }
+  .stats {
+    color: #B9B9B9;
+  }
+  .delete-btn{
+    display: none;
+  }
+  &:hover {
+    .delete-btn {
+      display: inline-block;
+    }
+  }
+
+}
 
 .add-task-row{  
   background-color: #ccc;
   padding: 10px 40px;
   margin-top: -15px;
 }
-.task-table {    
+.task-table {   
   td {
     vertical-align: middle !important;
   }

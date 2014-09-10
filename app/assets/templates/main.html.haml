@@ -1,10 +1,11 @@
 %h1.text-center.text-uppercase ToDo list
 .row{'ng-init' => 'init()'}   
-  .panel.panel-default.project-panel{'ng-repeat' => 'project in projects'}
+  .panel.panel-primary.project-panel{'ng-repeat' => 'project in projects'}
     .panel-heading 
-      {{project.name}} |
-      %span.text-muted{'ng-show' => 'project.tasks.length'}  {{completedTasks()}}/{{project.tasks.length}} tasks completed
-      %button{'ng-click' =>'deleteProject($index)'} x
+      %h3.panel-title
+        {{project.name}}
+      %span.text-muted.stats{'ng-show' => 'project.tasks.length'}  {{completedTasks()}}/{{project.tasks.length}} tasks completed
+      %span.glyphicon.glyphicon-trash.delete-btn.pull-right.is-clickable{'ng-click' =>'deleteProject($index)'}      
     .panel-body
       .row.add-task-row
         .col-lg-12
@@ -18,11 +19,15 @@
           %td.task-status
             %input{:type => "checkbox", 'ng-model' => 'task.completed', 'ng-change' =>'updateTask()'}/
           %td.task-name
-            %span {{task.name}}
+            %span{'ng-hide' => 'editMode'} {{task.name}}
+            .input-group{'ng-show' => 'editMode'}
+              %input.form-control{:type => "text", 'ng-model' => 'task.name'}/
+              %span.input-group-btn
+                %submit.btn.btn-primary{'ng-click' => 'updateTask()'} Save
           %td.task-controls
             .btn-group.btn-group-xs
               .btn.btn-default
-                %span.glyphicon.glyphicon-pencil
+                %span.glyphicon.glyphicon-pencil{'ng-click' =>'editMode = !editMode'}
               .btn.btn-default
                 %span.glyphicon.glyphicon-trash{'ng-click' =>'deleteTask($index)'}
   %h2.text-center{'ng-show'=>'user && !projects.length'} No projects yet. Why don't you create one?
@@ -31,7 +36,7 @@
     .row.add-project-row
       .col-lg-12
         %form{'ng-submit' =>'addProject(newProjectName)'}
-          .input-group
+          .input-group.shadowed
             %input.form-control{:type => "text", 'placeholder' =>'Start typing here to create a project...', 'ng-model' => 'newProjectName'}/
             %span.input-group-btn
               %submit.btn.btn-primary{'ng-click' => 'addProject(newProjectName)'} Add Project
