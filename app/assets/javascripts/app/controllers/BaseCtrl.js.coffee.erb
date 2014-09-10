@@ -1,27 +1,30 @@
 App.controller 'BaseCtrl', ['$scope', '$rootScope', 'Auth', '$modal', '$http', ($scope, $rootScope, Auth, $modal, $http)->
-  $scope.$on "devise:unauthorized", (event, xhr, deferred) ->    
-    modalInstance = $modal.open(
-      templateUrl: "<%= asset_path('form.html') %>"
-      controller: 'LoginCtrl'
-      backdrop: 'static'      
-    )
-    modalInstance.result.then(
-      #user hit OK
-      (creds)->
-        Auth.login(creds).then(
-          (response) -> 
-            deferred.resolve response          
-          , 
-          (error) ->           
-            deferred.reject error
-        )
-      ,
-      #user hit cancel
-      ()->
-        deferred.reject 'User doesn\'t want to login...'
-    )
-    
-
-    return
-
+  $scope.$on "devise:unauthorized", (event, xhr, deferred) -> 
+    console.log xhr.data.error
+    if xhr.data.error != 'Invalid email or password.'   #dirty hack =)
+      modalInstance = $modal.open(
+        templateUrl: "<%= asset_path('form.html') %>"
+        controller: 'LoginCtrl'
+        backdrop: 'static'
+        resolve :
+          auth: ()->
+            Auth     
+      )
+      modalInstance.result.then(
+        #user hit OK
+        (user)->
+          $http(xhr.config).then(
+            (res)->
+              console.log res
+              deferred.resolve res
+            ,
+            (error)->
+              deferred.reject error
+          )
+        ,
+        #user hit cancel
+        ()->
+          deferred.reject 'User doesn\'t want to login...'
+      )   
+      return
 ]

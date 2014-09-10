@@ -1,11 +1,10 @@
-App.controller 'ProjectsCtrl', ['$scope', 'Projects', 'Tasks', 'Auth', '$modal', ($scope, Projects, Tasks, Auth, $modal)->
-  $scope.projects = []
-  $scope.user = null
+App.controller 'ProjectsCtrl', ['$scope', '$rootScope', 'Projects', 'Tasks', 'Auth', '$modal', ($scope, $rootScope, Projects, Tasks, Auth, $modal)->
+  $scope.projects = []  
   
   $scope.init = ->    
     Auth.currentUser().then(
       (user)->
-        $scope.user = user        
+        $rootScope.user = user        
         $scope.find()
       ,
       (error)->

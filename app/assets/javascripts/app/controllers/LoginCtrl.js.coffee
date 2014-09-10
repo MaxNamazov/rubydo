@@ -1,8 +1,15 @@
-App.controller 'LoginCtrl', ['$scope', '$modalInstance', ($scope, $modalInstance)->
+App.controller 'LoginCtrl', ['$scope', '$modalInstance', 'auth', ($scope, $modalInstance, auth)->
   
   $scope.creds = {}
   $scope.ok = ->
-    $modalInstance.close($scope.creds)
+    auth.login($scope.creds).then(
+      (user)->  
+        location.reload()       
+      ,
+      (error)->
+        console.log error
+    )
+    # $modalInstance.close($scope.creds)
   $scope.cancel =->
     $modalInstance.dismiss 'cancel'
 ]

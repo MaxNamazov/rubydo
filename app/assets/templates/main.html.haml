@@ -1,4 +1,12 @@
-%h1.text-center.text-uppercase ToDo list
+.user-block{'ng-controller'=>'UserCtrl'}
+  .logged-in{'ng-show' => '$root.user'} 
+    %a{'href' => '#', 'ng-click' => 'logout()', } Logout
+  .not-logged-in{'ng-hide' => '$root.user'}
+    %a{'href' => '#', 'ng-click' => 'login()', } Login/SignUp
+
+%header.site-header
+  %h1.main-heading.text-center RubyDO
+  %h4.sub-heading.text-center Ruby on Rails todo list
 .row{'ng-init' => 'init()'}   
   .panel.panel-primary.project-panel{'ng-repeat' => 'project in projects'}
     .panel-heading 
