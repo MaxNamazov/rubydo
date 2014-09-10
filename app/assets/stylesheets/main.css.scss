@@ -11,6 +11,7 @@ body {
   background-image: url(asset-path('bg.jpg'));
   background-size: cover;
   background-attachment: fixed;
+  padding-top: 50px;
 }
 .is-clickable {
   cursor: pointer
